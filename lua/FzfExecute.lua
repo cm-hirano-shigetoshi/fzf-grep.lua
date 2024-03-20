@@ -15,8 +15,6 @@ local function get_initial_fzf_options(fzf_port)
         "--listen", fzf_port,
         "--ansi",
         "--multi",
-        "--delimiter", ":",
-        "--bind", "'enter:become(echo +{2} {1})'",
         "--reverse",
     }
 end
@@ -42,7 +40,8 @@ function FzfExecute:start_async(server)
     coroutine.wrap(function(server_, option_)
         local results = fzf.fzf(":", option_)
         for _, result in ipairs(results) do
-            vim.cmd("e " .. result)
+            local sp = split(result, ":")
+            vim.cmd("e +" .. sp[2] .. " " .. sp[1])
         end
         server_:stop()
     end)(server, option)
