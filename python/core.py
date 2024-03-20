@@ -7,7 +7,7 @@ binds = {
 
 
 def get_source():
-    return f"rg -n ^ {directory}"
+    return f"rg -n --color always ^ {directory}"
 
 
 def cd_up():

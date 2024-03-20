@@ -13,9 +13,11 @@ BIND_KEYS = { "alt-u" }
 local function get_initial_fzf_options(fzf_port)
     return {
         "--listen", fzf_port,
+        "--ansi",
         "--multi",
         "--delimiter", ":",
-        "--bind", "'enter:become(echo +{2} {1})'"
+        "--bind", "'enter:become(echo +{2} {1})'",
+        "--reverse",
     }
 end
 
