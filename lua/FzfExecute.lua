@@ -36,10 +36,11 @@ function FzfExecute.new()
     return self
 end
 
-function FzfExecute:start_async(server)
-    local base_options = get_initial_fzf_options(os.getenv("FZF_PORT"))
-    local bind_options = get_bind_options(os.getenv("SERVER_PORT"), BIND_KEYS)
-    local option = table.concat(base_options, " ") .. " " .. table.concat(bind_options, " ")
+function FzfExecute:start_async(server, query)
+    local query_option = "--query '" .. query .. " '"
+    local base_options = table.concat(get_initial_fzf_options(os.getenv("FZF_PORT")), " ")
+    local bind_options = table.concat(get_bind_options(os.getenv("SERVER_PORT"), BIND_KEYS), " ")
+    local option = query_option .. " " .. base_options .. " " .. bind_options
     coroutine.wrap(function(server_, option_)
         local results = fzf.fzf(SOURCE, option_)
         for _, result in ipairs(results) do

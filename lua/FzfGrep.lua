@@ -13,14 +13,19 @@ local function call(query)
 
     -- fzfのプロセスを開始
     local fzf = FzfExecute.new()
-    fzf:start_async(server)
+    fzf:start_async(server, query)
 
     -- serverを起動する
     server:start()
 end
 
-M.run = function(query)
-    call(query)
+M.run = function()
+    call("")
+end
+
+M.run_cword = function()
+    local cword = vim.fn.expand('<cword>')
+    call(cword)
 end
 
 return M
