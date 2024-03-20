@@ -8,6 +8,7 @@ require("fzf").default_options = {
     end
 }
 
+SOURCE = "rg -n --color always ^ ."
 BIND_KEYS = { "alt-u" }
 
 local function get_initial_fzf_options(fzf_port)
@@ -38,7 +39,7 @@ function FzfExecute:start_async(server)
     local bind_options = get_bind_options(os.getenv("SERVER_PORT"), BIND_KEYS)
     local option = table.concat(base_options, " ") .. " " .. table.concat(bind_options, " ")
     coroutine.wrap(function(server_, option_)
-        local results = fzf.fzf(":", option_)
+        local results = fzf.fzf(SOURCE, option_)
         for _, result in ipairs(results) do
             local sp = split(result, ":")
             vim.cmd("e +" .. sp[2] .. " " .. sp[1])
