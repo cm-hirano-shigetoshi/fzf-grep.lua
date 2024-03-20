@@ -17,6 +17,8 @@ local function get_initial_fzf_options(fzf_port)
         "--ansi",
         "--multi",
         "--reverse",
+        "--bind", "'ctrl-g:track+clear-query'",
+        "--scroll-off", "10",
     }
 end
 
