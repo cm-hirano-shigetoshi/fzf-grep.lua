@@ -7,7 +7,7 @@ binds = {
 
 
 def get_source():
-    return f"rg ^ {directory}"
+    return f"rg -n ^ {directory}"
 
 
 def cd_up():
