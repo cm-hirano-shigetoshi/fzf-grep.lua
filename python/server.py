@@ -33,15 +33,10 @@ class RequestHandler(AbsRequestHandler):
         return False
 
 
-def set_initial_source():
-    utils.request_fzf(data=f"reload({core.get_source()})")
-
-
 def start():
     httpd = HTTPServer(("", int(os.environ["SERVER_PORT"])), RequestHandler)
     httpd.serve_forever()
 
 
 if __name__ == "__main__":
-    set_initial_source()
     start()
