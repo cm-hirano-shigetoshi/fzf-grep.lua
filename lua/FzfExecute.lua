@@ -17,7 +17,10 @@ local function get_initial_fzf_options(fzf_port)
         "--ansi",
         "--multi",
         "--reverse",
+        "--delimiter", ":",
         "--bind", "'ctrl-g:track+clear-query'",
+        "--preview", "'bat --color=always --highlight-line {2} --plain -n {1}'",
+        "--preview-window", "+{2}+1/2:down:70%",
         "--scroll-off", "10",
     }
 end
